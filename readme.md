@@ -4,6 +4,6 @@
 
 ## Fonctionnalités
 
-- Support du rendu canvas HTML5
-- Architecture modulaire et extensible
-- Outils de développement intégrés
+- Support du rendu canvas HTML5;
+- Architecture modulaire et extensible;
+- Outils de développement intégrés.
