@@ -8,7 +8,7 @@ export class Loop {
     }
 
     start() {
-        requestAnimationFrame(() => {
+        this._handlerID = requestAnimationFrame(() => {
             this._animate();
         });
     }
@@ -23,5 +23,10 @@ export class Loop {
 
     stop() {
         cancelAnimationFrame(this._handlerID)
+        this._handlerID = null;
+    }
+
+    isLooping() {
+        return (this._handlerID)!!;
     }
 }
