@@ -9,7 +9,7 @@ export class Triangle extends Shape implements ITriangle, IDrawable {
     constructor(triangle: ITriangle) {
         super({
             ctx: triangle.ctx,
-            origine: triangle.origine,
+            origin: triangle.origin,
             color: triangle.color,
             rotation: triangle.rotation,
             stroke: triangle.stroke
@@ -20,7 +20,7 @@ export class Triangle extends Shape implements ITriangle, IDrawable {
 
     draw() {
         this.ctx.save();
-        this.ctx.translate(this.origine.x, this.origine.y);
+        this.ctx.translate(this.origin.x, this.origin.y);
         this.ctx.rotate(this.rotation);
         this.ctx.beginPath();
         this.ctx.moveTo(0, -this.height / 2);

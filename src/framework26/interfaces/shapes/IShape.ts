@@ -3,7 +3,7 @@ import {IStroke} from "../IStroke";
 
 export interface IShape {
     readonly ctx: CanvasRenderingContext2D;
-    readonly origine: IOrigin;
+    readonly origin: IOrigin;
     readonly color: string;
     readonly rotation?: number;
     readonly stroke?: IStroke;
