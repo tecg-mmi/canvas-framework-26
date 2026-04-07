@@ -1,17 +1,17 @@
-import {IOrigin} from "../interfaces/IOrigin";
 import {IStroke} from "../interfaces/IStroke";
 import {IShape} from "../interfaces/shapes/IShape";
+import {Vector} from "../Math/Vector";
 
 export abstract class Shape implements IShape {
     public readonly ctx: CanvasRenderingContext2D;
-    public readonly origin: IOrigin;
+    public readonly origin: Vector;
     public readonly color: string;
-    public readonly rotation: number;
+    public rotation: number;
     public readonly stroke?: IStroke;
 
     protected constructor(shape: IShape) {
         this.ctx = shape.ctx;
-        this.origin = shape.origin;
+        this.origin = new Vector(shape.origin);
         this.color = shape.color;
         this.rotation = shape.rotation ?? 0;
         this.stroke = shape.stroke;

@@ -6,4 +6,8 @@ export class Random {
         return Math.round(Math.random() * (value.max - value.min) + value.min)
     }
 
+    static nextFloat(value: IInterval): number {
+        return Math.random() * (value.max - value.min) + value.min
+    }
+
 }

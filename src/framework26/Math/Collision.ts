@@ -1,6 +1,7 @@
 import {IOrigin} from "../interfaces/IOrigin";
+import {ICircle} from "../interfaces/shapes/ICircle";
 
-interface IRectangle {
+export interface IRectangle {
     width: number,
     height: number,
     origin: IOrigin
@@ -15,19 +16,20 @@ export class Collision {
             aTopX > bBottomX ||
             aTopY > bBottomY);
     }
-static checkRectangleCollision(a: IRectangle, b: IRectangle): boolean {
-    const aHalfWidth = a.width / 2;
-    const aHalfHeight = a.height / 2;
-    const bHalfWidth = b.width / 2;
-    const bHalfHeight = b.height / 2;
 
-    return !(
-        a.origin.x + aHalfWidth < b.origin.x - bHalfWidth ||
-        a.origin.y + aHalfHeight < b.origin.y - bHalfHeight ||
-        a.origin.x - aHalfWidth > b.origin.x + bHalfWidth ||
-        a.origin.y - aHalfHeight > b.origin.y + bHalfHeight
-    );
-}
+    static checkRectangleCollision(a: IRectangle, b: IRectangle): boolean {
+        const aHalfWidth = a.width / 2;
+        const aHalfHeight = a.height / 2;
+        const bHalfWidth = b.width / 2;
+        const bHalfHeight = b.height / 2;
+
+        return !(
+            a.origin.x + aHalfWidth < b.origin.x - bHalfWidth ||
+            a.origin.y + aHalfHeight < b.origin.y - bHalfHeight ||
+            a.origin.x - aHalfWidth > b.origin.x + bHalfWidth ||
+            a.origin.y - aHalfHeight > b.origin.y + bHalfHeight
+        );
+    }
 
     static replaceOutOfBounds(rectangle: IRectangle, canvas: HTMLCanvasElement) {
         if (rectangle.origin.y > canvas.height + rectangle.height) {
@@ -77,6 +79,22 @@ static checkRectangleCollision(a: IRectangle, b: IRectangle): boolean {
             Math.abs(rotatedX) <= halfWidth &&
             Math.abs(rotatedY) <= halfHeight
         );
+    }
+
+    static isCircleInRectangle(circle: ICircle, rectangle: IRectangle): boolean {
+        const halfWidth = rectangle.width / 2;
+        const halfHeight = rectangle.height / 2;
+
+        // Trouver le point le plus proche du centre du cercle par rapport au rectangle
+        const closestX = Math.max(rectangle.origin.x - halfWidth, Math.min(circle.origin.x, rectangle.origin.x + halfWidth));
+        const closestY = Math.max(rectangle.origin.y - halfHeight, Math.min(circle.origin.y, rectangle.origin.y + halfHeight));
+
+        // Calculer la diff entre le centre du cercle et ce point le plus proche
+        const distanceX = circle.origin.x - closestX;
+        const distanceY = circle.origin.y - closestY;
+
+        // Si la distance est inférieure au rayon du cercle, il y a collision
+        return (distanceX * distanceX + distanceY * distanceY) < (circle.radius * circle.radius);
     }
 
 }
